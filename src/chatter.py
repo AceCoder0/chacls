@@ -15,12 +15,13 @@ from pprint import pprint
 
 
 class Chatter:
-    def __init__(self, model_name: str, sampling_params: Dict=None):
+    def __init__(self, model_name: str, sampling_params: Dict=None, use_tqdm=True):
         self.model_name=model_name
         self.llm = None
         self.tokenizer=None
         self.model_loaded=False
         self.model_path = llm_path[model_name]
+        self.use_tqdm=use_tqdm
         if sampling_params:
             self.sampling_params=SamplingParams(**sampling_params)
         else:
@@ -41,7 +42,7 @@ class Chatter:
         assert self.model_loaded, f"llm must be loaded before generate."
         if sampling_params:
             self.set_sampling_params(sampling_params) 
-        response = self.llm.generate(prompt, sampling_params=self.sampling_params)
+        response = self.llm.generate(prompt, sampling_params=self.sampling_params, use_tqdm=self.use_tqdm)
         response = [o.outputs[0].text for o in response]
         if isinstance(prompt, list):
             return response

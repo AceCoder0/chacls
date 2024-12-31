@@ -24,9 +24,9 @@ def extract_json_content(text):
 
 
 class CN:
-    def __init__(self, lm_name=None):
+    def __init__(self, lm_name=None, use_tqdm=False):
         if lm_name:
-            self.chatter=Chatter(lm_name)
+            self.chatter=Chatter(lm_name, use_tqdm=use_tqdm)
         else:
             self.chatter=None
         self.lm_loaded=False
