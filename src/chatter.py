@@ -47,9 +47,15 @@ class Chatter:
             return response
         return response[0]
         
-    def chat_list(self, prompts: List[str], sampling_params: Dict=None) -> List[str]:
-        pass
-    
+    def chat(self, prompts: Union[List[str], str, Dict], sampling_params: Dict=None) -> List[str]:
+        # if isinstance(prompts, Dict):
+        prompts = self.tokenizer.apply_chat_template(
+            prompts,
+            add_generation_prompt=True,
+            tokenize=False
+        )
+        return  self.generate(prompts, sampling_params)
+
     def multiturn_chat(self,):
         pass
 
