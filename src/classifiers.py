@@ -94,6 +94,20 @@ class CN:
             }
         return self.lm_cls(chunk)
 
+class SubjectClassifier(CN):
+    def __init__(self, lm_name=None, use_tqdm=False):
+        super().__init__(lm_name, use_tqdm)
+
+    def recall(self, chunk: TextChunk, classses: List[str])-> List[str]:
+        s = str(chunk)
+        
+    
+    def lm_cls(self, chunk: TextChunk):
+        pass
+
+    def cls(self, chunk: TextChunk):
+        pass
+
 if __name__ == '__main__':
     from pathlib import Path
     from textChunker import Article, article_from_txt, chunks_from_article
